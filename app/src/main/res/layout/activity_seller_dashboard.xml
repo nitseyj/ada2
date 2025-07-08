@@ -1,34 +1,96 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:padding="24dp"
-    android:orientation="vertical"
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="16dp">
 
-    <Button
-        android:id="@+id/btnCreateListing"
-        android:text="Create New Listing"
+    <!-- Profile Icon (Top Right) -->
+    <ImageView
+        android:id="@+id/imgProfileIconSeller"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_alignParentEnd="true"
+        android:src="@android:drawable/ic_menu_myplaces"
+        android:contentDescription="Profile" />
+
+    <!-- Welcome Message -->
+    <TextView
+        android:id="@+id/txtWelcomeSeller"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Welcome, Seller"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@id/imgProfileIconSeller"
+        android:layout_toStartOf="@id/imgProfileIconSeller"
+        android:layout_marginEnd="8dp" />
+
+    <!-- Revenue and Quantity Summary -->
+    <LinearLayout
+        android:id="@+id/layoutSummary"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp" />
+        android:layout_below="@id/imgProfileIconSeller"
+        android:layout_marginTop="16dp">
 
-    <TextView
-        android:text="My Listings:"
-        android:textStyle="bold"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/txtRevenue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total Revenue: RM 0.00"
+            android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/txtItemsSold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total Items Sold: 0 kg"
+            android:textStyle="bold"
+            android:layout_marginTop="4dp" />
+    </LinearLayout>
+
+    <!-- Seller Listings -->
     <ListView
-        android:id="@+id/listViewListings"
+        android:id="@+id/listViewSeller"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:dividerHeight="10dp" />
+        android:layout_above="@+id/layoutButtons"
+        android:layout_below="@id/layoutSummary"
+        android:layout_marginTop="12dp" />
 
-    <Button
-        android:id="@+id/btnLogoutSeller"
-        android:text="Logout"
+    <!-- Buttons: Create Listing, Logout, Back -->
+    <LinearLayout
+        android:id="@+id/layoutButtons"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp" />
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:weightSum="3"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp">
 
-</LinearLayout>
+        <Button
+            android:id="@+id/btnBackSeller"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Back" />
+
+        <Button
+            android:id="@+id/btnCreateListing"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Create Listing" />
+
+        <Button
+            android:id="@+id/btnLogoutSeller"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Logout" />
+    </LinearLayout>
+</RelativeLayout>

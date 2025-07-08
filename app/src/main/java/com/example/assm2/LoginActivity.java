@@ -51,21 +51,21 @@ public class LoginActivity extends AppCompatActivity {
                         String address = cursor.getString(cursor.getColumnIndexOrThrow("address"));
                         cursor.close();
 
-                        Intent intent = new Intent(this, SellerDashboardActivity.class);
-                        intent.putExtra("id", id);
-                        intent.putExtra("name", name);
-                        intent.putExtra("phone", phone);
-                        intent.putExtra("address", address);
-                        startActivity(intent);
+                        Intent sellerIntent = new Intent(this, SellerDashboardActivity.class);
+                        sellerIntent.putExtra("id", id);
+                        sellerIntent.putExtra("name", name);
+                        sellerIntent.putExtra("phone", phone);
+                        sellerIntent.putExtra("address", address);
+                        startActivity(sellerIntent);
                         finish();
                     } else {
                         Toast.makeText(this, "Failed to load seller info", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    // Buyer login success — redirect to buyer dashboard
-                    Intent intent = new Intent(this, BuyerDashboardActivity.class);
-                    intent.putExtra("id", id); // Optional
-                    startActivity(intent);
+                    // Buyer login
+                    Intent buyerIntent = new Intent(this, BuyerDashboardActivity.class);
+                    buyerIntent.putExtra("id", id);
+                    startActivity(buyerIntent);
                     finish();
                 }
 
