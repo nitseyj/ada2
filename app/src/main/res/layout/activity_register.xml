@@ -1,0 +1,39 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="Register"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="24dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <EditText android:id="@+id/etName" android:hint="Full Name" android:layout_width="match_parent" android:layout_height="wrap_content" />
+        <EditText android:id="@+id/etPhone" android:hint="Phone Number" android:inputType="phone" android:layout_width="match_parent" android:layout_height="wrap_content" />
+        <EditText android:id="@+id/etEmail" android:hint="Email" android:inputType="textEmailAddress" android:layout_width="match_parent" android:layout_height="wrap_content" />
+        <EditText android:id="@+id/etAddress" android:hint="Address" android:layout_width="match_parent" android:layout_height="wrap_content" />
+        <EditText android:id="@+id/etAccountID" android:hint="Account ID" android:layout_width="match_parent" android:layout_height="wrap_content" />
+        <EditText android:id="@+id/etPin" android:hint="PIN (6-digit)" android:inputType="numberPassword" android:maxLength="6" android:layout_width="match_parent" android:layout_height="wrap_content" />
+
+        <RadioGroup android:id="@+id/roleGroup" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginTop="16dp">
+            <RadioButton android:id="@+id/rbBuyer" android:text="Buyer" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+            <RadioButton android:id="@+id/rbSeller" android:text="Seller" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        </RadioGroup>
+
+        <CheckBox android:id="@+id/cbTos" android:text="I agree to the Terms of Service" android:layout_marginTop="16dp" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+
+        <Button android:id="@+id/btnRegister" android:text="Register" android:layout_marginTop="24dp" android:layout_width="match_parent" android:layout_height="wrap_content" />
+        <Button android:id="@+id/btnBackRegister" android:text="Back" android:layout_marginTop="12dp" android:layout_width="match_parent" android:layout_height="wrap_content" />
+    </LinearLayout>
+</ScrollView>
