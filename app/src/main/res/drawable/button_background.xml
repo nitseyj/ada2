@@ -1,0 +1,19 @@
+<!-- res/drawable/button_background.xml -->
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="?android:attr/colorControlHighlight">
+
+    <item android:id="@android:id/mask">
+        <shape android:shape="rectangle">
+            <solid android:color="#66BB6A" /> <!-- ripple mask color -->
+            <corners android:radius="12dp" />
+        </shape>
+    </item>
+
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#4CAF50" /> <!-- actual green background -->
+            <corners android:radius="12dp" />
+        </shape>
+    </item>
+
+</ripple>

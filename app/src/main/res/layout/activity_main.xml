@@ -1,42 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="24dp"
-    android:gravity="center"
-    android:orientation="vertical"
-    android:background="#FFFFFF">
+    android:background="@drawable/bg_gradient_green">
 
-    <TextView
-        android:text="Welcome to RecycleBersama"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="32dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <Button
-        android:id="@+id/btnBuyer"
-        android:text="Login as Buyer"
-        android:layout_width="match_parent"
+    <!-- Wrapper to center all views vertically -->
+    <LinearLayout
+        android:id="@+id/centerContent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp" />
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-    <Button
-        android:id="@+id/btnSeller"
-        android:text="Login as Seller"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <!-- App Title -->
+        <TextView
+            android:id="@+id/textAppTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="♻️Recycle Bersama"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="#2E7D32"
+            android:layout_marginBottom="16dp" />
 
-    <TextView
-        android:id="@+id/txtFirstTime"
-        android:text="First time user? Register here"
-        android:textColor="@android:color/holo_blue_dark"
-        android:textStyle="bold"
-        android:textSize="16sp"
-        android:layout_marginTop="32dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:focusable="true" />
-</LinearLayout>
+
+        <!-- Lottie animation -->
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottieRecycle"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            app:lottie_fileName="recycle_anim.json"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            android:layout_marginBottom="24dp" />
+
+        <TextView
+            android:id="@+id/textSlogan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🌱Reduce Reuse Recycle Rebuild the Earth🌏"
+            android:textColor="#2E7D32"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            android:layout_marginBottom="24dp"
+            android:fontFamily="sans-serif-medium" />
+
+
+        <!-- Login as Buyer -->
+        <Button
+            android:id="@+id/btnBuyer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Login as Buyer"
+            android:backgroundTint="#66BB6A"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Login as Seller -->
+        <Button
+            android:id="@+id/btnSeller"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Login as Seller"
+            android:backgroundTint="#388E3C"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Register Link -->
+        <TextView
+            android:id="@+id/txtFirstTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="First time here? Register"
+            android:textColor="#2E7D32"
+            android:textStyle="italic"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
