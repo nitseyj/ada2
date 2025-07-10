@@ -29,6 +29,9 @@
         <activity android:name=".ProfileActivity" />
         <activity android:name=".ListingDetailActivity" />
         <activity android:name=".PurchaseHistoryActivity" />
+        <activity android:name=".MapActivity" />
+        <activity android:name=".PricingActivity" />
+        <activity android:name=".ContactUsActivity" />
     </application>
 
 </manifest>

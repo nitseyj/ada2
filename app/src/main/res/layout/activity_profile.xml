@@ -1,59 +1,107 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:padding="24dp"
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_gradient_green"
+    android:padding="24dp">
 
-    <LinearLayout
-        android:orientation="vertical"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-        <EditText
-            android:id="@+id/etProfileName"
-            android:hint="Name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <EditText
-            android:id="@+id/etProfilePhone"
-            android:hint="Phone"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="phone" />
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:padding="16dp">
 
-        <EditText
-            android:id="@+id/etProfileAddress"
-            android:hint="Address"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            <!-- Profile Image -->
+            <ImageView
+                android:id="@+id/imgProfile"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@drawable/ic_profile"
+                android:scaleType="centerCrop"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/circle_background"
+                android:contentDescription="Profile Image" />
 
-        <EditText
-            android:id="@+id/etProfilePIN"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="numberPassword"
-            android:hint="Enter 6-digit PIN" />
+            <!-- Upload Image Button -->
+            <Button
+                android:id="@+id/btnUploadImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
 
-        <CheckBox
-            android:id="@+id/checkboxShowPIN"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Show PIN"
-            android:layout_marginBottom="16dp"/>
+                android:text="Upload Image"
+                android:layout_marginBottom="16dp" />
 
-        <Button
-            android:id="@+id/btnSaveProfile"
-            android:text="Save"
-            android:layout_marginTop="16dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            <!-- Name -->
+            <EditText
+                android:id="@+id/etProfileName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Name" />
 
-        <Button
-            android:id="@+id/btnBackProfile"
-            android:text="Back"
-            android:layout_width="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_height="wrap_content" />
+            <!-- Phone -->
+            <EditText
+                android:id="@+id/etProfilePhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Phone"
+                android:layout_marginTop="8dp" />
 
-    </LinearLayout>
-</ScrollView>
+            <!-- Address -->
+            <EditText
+                android:id="@+id/etProfileAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Address"
+                android:layout_marginTop="8dp" />
+
+            <!-- PIN -->
+            <EditText
+                android:id="@+id/etProfilePIN"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="PIN"
+                android:inputType="numberPassword"
+                android:layout_marginTop="8dp" />
+
+            <!-- Show PIN -->
+            <CheckBox
+                android:id="@+id/checkboxShowPIN"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Show PIN"
+                android:layout_marginTop="8dp" />
+
+            <!-- Save and Back Buttons -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/btnBackProfile"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Back" />
+
+                <Button
+                    android:id="@+id/btnSaveProfile"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:backgroundTint="#4CAF50"
+                    android:text="Save"
+                    android:layout_marginStart="8dp" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

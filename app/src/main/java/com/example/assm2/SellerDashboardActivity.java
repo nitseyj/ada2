@@ -16,9 +16,11 @@ import java.util.ArrayList;
 public class SellerDashboardActivity extends AppCompatActivity {
 
     TextView txtWelcomeSeller, txtRevenue, txtItemsSold;
-    ImageView imgProfileIcon;
-    Button btnCreateListing, btnLogout, btnBackSeller;
+    Button btnCreateListing, btnLogout;
     ListView listView;
+
+    // Bottom nav icons
+    ImageView navRecycle, navMap, navPricing, navContact, navProfile;
 
     SQLiteHelper dbHelper;
     String sellerId, sellerName;
@@ -35,36 +37,30 @@ public class SellerDashboardActivity extends AppCompatActivity {
         sellerId = getIntent().getStringExtra("id");
         sellerName = "Seller";
 
-        // Fetch seller name
         Cursor cursor = dbHelper.getUserById(sellerId);
         if (cursor != null && cursor.moveToFirst()) {
             sellerName = cursor.getString(cursor.getColumnIndexOrThrow("name"));
             cursor.close();
         }
 
-        // Bind Views
         txtWelcomeSeller = findViewById(R.id.txtWelcomeSeller);
         txtRevenue = findViewById(R.id.txtRevenue);
         txtItemsSold = findViewById(R.id.txtItemsSold);
-        imgProfileIcon = findViewById(R.id.imgProfileIconSeller);
         btnCreateListing = findViewById(R.id.btnCreateListing);
         btnLogout = findViewById(R.id.btnLogoutSeller);
-        btnBackSeller = findViewById(R.id.btnBackSeller);
         listView = findViewById(R.id.listViewSeller);
+
+        navRecycle = findViewById(R.id.navRecycle);
+        navMap = findViewById(R.id.navMap);
+        navPricing = findViewById(R.id.navPricing);
+        navContact = findViewById(R.id.navContact);
+        navProfile = findViewById(R.id.navProfile);
 
         txtWelcomeSeller.setText("Welcome, " + sellerName);
 
-        // Load Listings
         loadSellerListings();
 
-        // Profile Button
-        imgProfileIcon.setOnClickListener(v -> {
-            Intent profileIntent = new Intent(this, ProfileActivity.class);
-            profileIntent.putExtra("id", sellerId);
-            startActivity(profileIntent);
-        });
-
-        // Create Listing
+        // Create new listing
         btnCreateListing.setOnClickListener(v -> {
             Intent listingIntent = new Intent(this, CreateListingActivity.class);
             listingIntent.putExtra("id", sellerId);
@@ -79,10 +75,7 @@ public class SellerDashboardActivity extends AppCompatActivity {
             finish();
         });
 
-        // Back Button
-        btnBackSeller.setOnClickListener(v -> finish());
-
-        // Delete Listing
+        // Delete on tap
         listView.setOnItemClickListener((parent, view, position, id) -> {
             ListingItem item = sellerListings.get(position);
             new AlertDialog.Builder(this)
@@ -94,6 +87,33 @@ public class SellerDashboardActivity extends AppCompatActivity {
                     })
                     .setNegativeButton("Cancel", null)
                     .show();
+        });
+
+        // Bottom Navigation
+        navRecycle.setOnClickListener(v -> recreate());
+
+        navMap.setOnClickListener(v -> {
+            Intent intent = new Intent(this, MapActivity.class);
+            intent.putExtra("id", sellerId);
+            startActivity(intent);
+        });
+
+        navPricing.setOnClickListener(v -> {
+            Intent intent = new Intent(this, PricingActivity.class);
+            intent.putExtra("id", sellerId);
+            startActivity(intent);
+        });
+
+        navContact.setOnClickListener(v -> {
+            Intent intent = new Intent(this, ContactUsActivity.class);
+            intent.putExtra("id", sellerId);
+            startActivity(intent);
+        });
+
+        navProfile.setOnClickListener(v -> {
+            Intent intent = new Intent(this, ProfileActivity.class);
+            intent.putExtra("id", sellerId);
+            startActivity(intent);
         });
     }
 

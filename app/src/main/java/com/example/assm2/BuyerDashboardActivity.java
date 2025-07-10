@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.HorizontalScrollView;
@@ -23,8 +22,10 @@ public class BuyerDashboardActivity extends AppCompatActivity {
     EditText etSearch;
     Button btnSortPrice, btnSortQuantity, btnLogoutBuyer, btnViewHistory;
     ListView listView;
-    ImageView imgProfileIcon;
     LinearLayout layoutSuggestions;
+
+    // Bottom nav icons
+    ImageView navRecycle, navMap, navPricing, navContact, navProfile;
 
     SQLiteHelper dbHelper;
     String buyerId;
@@ -57,10 +58,16 @@ public class BuyerDashboardActivity extends AppCompatActivity {
         btnSortPrice = findViewById(R.id.btnSortPrice);
         btnSortQuantity = findViewById(R.id.btnSortQuantity);
         btnLogoutBuyer = findViewById(R.id.btnLogoutBuyer);
-        btnViewHistory = findViewById(R.id.btnViewHistory); // ✅ new
+        btnViewHistory = findViewById(R.id.btnViewHistory);
         listView = findViewById(R.id.listViewBuyer);
-        imgProfileIcon = findViewById(R.id.imgProfileIcon);
         layoutSuggestions = findViewById(R.id.layoutSuggestions);
+
+        // Bottom navigation buttons
+        navRecycle = findViewById(R.id.navRecycle);
+        navMap = findViewById(R.id.navMap);
+        navPricing = findViewById(R.id.navPricing);
+        navContact = findViewById(R.id.navContact); // <-- changed from navLearn
+        navProfile = findViewById(R.id.navProfile);
 
         txtWelcomeBuyer.setText("Welcome, " + buyerName);
 
@@ -81,12 +88,6 @@ public class BuyerDashboardActivity extends AppCompatActivity {
             finish();
         });
 
-        imgProfileIcon.setOnClickListener(v -> {
-            Intent intent = new Intent(this, ProfileActivity.class);
-            intent.putExtra("id", buyerId);
-            startActivity(intent);
-        });
-
         btnViewHistory.setOnClickListener(v -> {
             Intent intent = new Intent(this, PurchaseHistoryActivity.class);
             intent.putExtra("id", buyerId);
@@ -104,7 +105,34 @@ public class BuyerDashboardActivity extends AppCompatActivity {
             intent.putExtra("phone", selected.phone);
             intent.putExtra("address", selected.address);
             intent.putExtra("available", selected.available);
-            intent.putExtra("buyerId", buyerId); // ✅ Pass buyer ID for purchase recording
+            intent.putExtra("buyerId", buyerId);
+            startActivity(intent);
+        });
+
+        // 🧭 Bottom nav actions
+        navRecycle.setOnClickListener(v -> recreate());
+
+        navMap.setOnClickListener(v -> {
+            Intent intent = new Intent(this, MapActivity.class);
+            intent.putExtra("id", buyerId);
+            startActivity(intent);
+        });
+
+        navPricing.setOnClickListener(v -> {
+            Intent intent = new Intent(this, PricingActivity.class);
+            intent.putExtra("id", buyerId);
+            startActivity(intent);
+        });
+
+        navContact.setOnClickListener(v -> {
+            Intent intent = new Intent(this, ContactUsActivity.class); // <-- updated here
+            intent.putExtra("id", buyerId);
+            startActivity(intent);
+        });
+
+        navProfile.setOnClickListener(v -> {
+            Intent intent = new Intent(this, ProfileActivity.class);
+            intent.putExtra("id", buyerId);
             startActivity(intent);
         });
     }
