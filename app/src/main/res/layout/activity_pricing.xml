@@ -1,12 +1,73 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center">
+    android:background="@drawable/bg_gradient_green"
+    android:padding="16dp">
 
-    <TextView
-        android:text="Real-Time Pricing Page"
-        android:textSize="18sp"
-        android:textStyle="bold"
+    <!-- Back Button (Top Left) -->
+    <Button
+        android:id="@+id/btnBackPricing"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-</FrameLayout>
+        android:layout_height="wrap_content"
+        android:text="⬅️ Back"
+        android:textColor="@android:color/white"
+        android:backgroundTint="#0D2B3E"
+        android:layout_alignParentStart="true" />
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/txtPricingTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Material Prices"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:textColor="#0D2B3E"
+        android:layout_below="@id/btnBackPricing"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp" />
+
+    <!-- Last Updated -->
+    <TextView
+        android:id="@+id/txtLastUpdated"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Last updated: -"
+        android:textColor="#444"
+        android:textSize="14sp"
+        android:layout_below="@id/txtPricingTitle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp" />
+
+    <!-- Scrollable Container for Material Cards -->
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_below="@id/txtLastUpdated"
+        android:layout_above="@+id/btnRefreshPricing"
+        android:layout_marginTop="16dp"
+        android:layout_alignParentBottom="false">
+
+        <LinearLayout
+            android:id="@+id/containerPricing"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="16dp" />
+    </ScrollView>
+
+    <!-- Refresh Button (Bottom Center) -->
+    <Button
+        android:id="@+id/btnRefreshPricing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="🔄 Refresh"
+        android:textColor="@android:color/white"
+        android:backgroundTint="#388E3C"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="12dp" />
+
+</RelativeLayout>

@@ -1,32 +1,212 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:padding="16dp"
-    android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/bg_gradient_green"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- Back Button -->
+    <Button
+        android:id="@+id/btnBackContact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="⬅️ Back"
+        android:textSize="14sp"
+        android:backgroundTint="#0D2B3E"
+        android:textColor="@android:color/white"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp" />
+
+    <!-- Main Title -->
     <TextView
+        android:id="@+id/txtMainTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="Contact Us"
-        android:textSize="24sp"
+        android:textColor="#0D2B3E"
+        android:textSize="32sp"
         android:textStyle="bold"
-        android:layout_marginBottom="16dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_below="@id/btnBackContact"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="18dp" />
 
-    <TextView
-        android:text="📧 Email: support@recyclebersama.com"
-        android:layout_marginBottom="8dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <!-- Scrollable Content -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/txtMainTitle"
+        android:layout_marginTop="28dp"
+        android:layout_marginBottom="18dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp">
 
-    <TextView
-        android:text="📞 Phone: +60 123-456-789"
-        android:layout_marginBottom="8dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
 
-    <TextView
-        android:text="📍 Address: Penang, Malaysia"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-</LinearLayout>
+            <!-- Subheading -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Get in Touch"
+                android:textSize="23sp"
+                android:textColor="#0D2B3E"
+                android:textStyle="bold"
+                android:layout_marginBottom="10dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="If you have any inquiries, feel free to reach out."
+                android:textColor="#444"
+                android:textSize="17sp"
+                android:layout_marginBottom="24dp" />
+
+            <!-- Phone Box -->
+            <LinearLayout
+                android:id="@+id/layoutPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/bg_card_white"
+                android:padding="16dp"
+                android:layout_marginBottom="16dp"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@android:drawable/ic_menu_call"
+                    android:tint="#0D2B3E" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="+60 123-456-789"
+                    android:layout_marginStart="12dp"
+                    android:textColor="#0D2B3E"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <!-- Email Box -->
+            <LinearLayout
+                android:id="@+id/layoutEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/bg_card_white"
+                android:padding="16dp"
+                android:layout_marginBottom="32dp"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@android:drawable/ic_dialog_email"
+                    android:tint="#0D2B3E" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="support@recyclebersama.com"
+                    android:layout_marginStart="12dp"
+                    android:textColor="#0D2B3E"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <!-- Social Media Title -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Social Media"
+                android:textColor="#0D2B3E"
+                android:textStyle="bold"
+                android:textSize="25sp"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Facebook -->
+            <LinearLayout
+                android:id="@+id/layoutFacebook"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:gravity="center_vertical"
+                android:padding="12dp"
+                android:layout_marginBottom="12dp">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_facebook"
+                    android:scaleType="centerInside"
+                    android:layout_marginEnd="12dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:gravity="center_vertical"
+                    android:text="Follow us on Facebook"
+                    android:textColor="#0D2B3E"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <!-- Instagram -->
+            <LinearLayout
+                android:id="@+id/layoutInstagram"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:gravity="center_vertical"
+                android:padding="12dp"
+                android:layout_marginBottom="12dp">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_instagram"
+                    android:scaleType="centerInside"
+                    android:layout_marginEnd="12dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:gravity="center_vertical"
+                    android:text="Explore our Instagram"
+                    android:textColor="#0D2B3E"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <!-- Twitter -->
+            <LinearLayout
+                android:id="@+id/layoutTwitter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:gravity="center_vertical"
+                android:padding="12dp"
+                android:layout_marginBottom="32dp">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_twitter"
+                    android:scaleType="centerInside"
+                    android:layout_marginEnd="12dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:gravity="center_vertical"
+                    android:text="Follow us on Twitter"
+                    android:textColor="#0D2B3E"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

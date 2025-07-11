@@ -1,66 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:padding="24dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_gradient_green"
+    android:fillViewport="true"
+    android:padding="16dp">
 
-    <LinearLayout
-        android:orientation="vertical"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-        <TextView android:id="@+id/txtTitleDetail"
-            android:text="Title"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView android:id="@+id/txtPriceDetail"
-            android:text="Price"
-            android:layout_marginTop="8dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView android:id="@+id/txtQuantityDetail"
-            android:text="Quantity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView android:id="@+id/txtSellerInfoDetail"
-            android:text="Seller Info"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp" />
-
-        <TextView android:id="@+id/txtDescDetail"
-            android:text="Description"
-            android:layout_marginTop="8dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView android:id="@+id/txtStatusDetail"
-            android:text="Status"
-            android:textStyle="italic"
-            android:layout_marginTop="12dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <Button
-            android:id="@+id/btnPurchase"
-            android:text="Purchase"
-            android:layout_marginTop="20dp"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <!-- Only one Back button kept -->
-        <Button
-            android:id="@+id/btnBackDetail"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Back"
-            android:layout_marginTop="16dp"
-            android:layout_gravity="center_horizontal" />
+            android:layout_centerInParent="true"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
 
-    </LinearLayout>
+            <!-- Product Card -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/rounded_white_box"
+                android:padding="24dp"
+                android:elevation="4dp"
+                android:layout_marginBottom="24dp">
+
+                <TextView
+                    android:id="@+id/txtTitleDetail"
+                    android:text="Product Title"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:textColor="#2E7D32"
+                    android:layout_marginBottom="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/txtPriceDetail"
+                    android:text="RM 99.99"
+                    android:textSize="18sp"
+                    android:textColor="#E64A19"
+                    android:layout_marginBottom="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/txtQuantityDetail"
+                    android:text="Quantity: 5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/txtSellerInfoDetail"
+                    android:text="Seller: John | 📞 012-3456789"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp" />
+
+                <TextView
+                    android:id="@+id/txtDescDetail"
+                    android:text="Description goes here..."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp" />
+
+                <TextView
+                    android:id="@+id/txtStatusDetail"
+                    android:text="Status: Available"
+                    android:textStyle="italic"
+                    android:textColor="#555"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp" />
+
+                <Button
+                    android:id="@+id/btnPurchase"
+                    android:text="Purchase Now"
+                    android:textAllCaps="false"
+                    android:backgroundTint="#388E3C"
+                    android:textColor="#FFFFFF"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnBackDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="⬅️ Back"
+                android:textAllCaps="false"
+                android:backgroundTint="#4CAF50"
+                android:textColor="@android:color/white"
+                android:layout_gravity="center_horizontal" />
+        </LinearLayout>
+    </RelativeLayout>
 </ScrollView>

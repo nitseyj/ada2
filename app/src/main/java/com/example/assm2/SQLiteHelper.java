@@ -10,7 +10,7 @@ import android.util.Log;
 public class SQLiteHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "assm2.db";
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
 
     // === USERS TABLE ===
     private static final String TABLE_USERS = "users";
@@ -21,6 +21,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     private static final String COL_ADDRESS = "address";
     private static final String COL_PIN = "pin";
     private static final String COL_ROLE = "role";
+    private static final String COL_PROFILE_PIC = "profile_pic"; // ✅ NEW
 
     // === LISTINGS TABLE ===
     private static final String TABLE_LISTINGS = "listings";
@@ -49,10 +50,9 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-    // ✅ SINGLE onCreate METHOD FOR ALL TABLES
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // === USERS TABLE CREATION ===
+        // === USERS TABLE ===
         String createUsersTable = "CREATE TABLE " + TABLE_USERS + " (" +
                 COL_ID + " TEXT PRIMARY KEY, " +
                 COL_NAME + " TEXT, " +
@@ -60,11 +60,11 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 COL_EMAIL + " TEXT, " +
                 COL_ADDRESS + " TEXT, " +
                 COL_PIN + " TEXT, " +
-                COL_ROLE + " TEXT)";
+                COL_ROLE + " TEXT, " +
+                COL_PROFILE_PIC + " BLOB)"; // ✅ NEW
         db.execSQL(createUsersTable);
-        Log.d("DB_CREATE", "User table created.");
 
-        // === LISTINGS TABLE CREATION ===
+        // === LISTINGS TABLE ===
         String createListingsTable = "CREATE TABLE " + TABLE_LISTINGS + " (" +
                 COL_LISTING_ID + " TEXT PRIMARY KEY, " +
                 COL_TITLE + " TEXT, " +
@@ -77,9 +77,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 COL_SELLER_PHONE + " TEXT, " +
                 COL_SELLER_ADDRESS + " TEXT)";
         db.execSQL(createListingsTable);
-        Log.d("DB_CREATE", "Listings table created.");
 
-        // === PURCHASE HISTORY TABLE CREATION ===
+        // === PURCHASE TABLE ===
         String createPurchasesTable = "CREATE TABLE " + TABLE_PURCHASES + " (" +
                 COL_PURCHASE_ID + " TEXT PRIMARY KEY, " +
                 COL_BUYER_ID + " TEXT, " +
@@ -89,7 +88,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 COL_SELLER + " TEXT, " +
                 COL_DATE + " TEXT)";
         db.execSQL(createPurchasesTable);
-        Log.d("DB_CREATE", "Purchase history table created.");
     }
 
     @Override
@@ -100,8 +98,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    // === USERS METHODS ===
-
+    // === USERS ===
     public boolean insertUser(String id, String name, String phone, String email, String address,
                               String pin, String role) {
         if (checkUserExists(id)) return false;
@@ -148,8 +145,30 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 null, null, null);
     }
 
-    // === LISTINGS METHODS ===
+    public boolean updateProfilePicture(String userId, byte[] imageBytes) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COL_PROFILE_PIC, imageBytes);
 
+        int rows = db.update(TABLE_USERS, values, COL_ID + "=?", new String[]{userId});
+        return rows > 0;
+    }
+
+    public byte[] getProfilePicture(String userId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_USERS, new String[]{COL_PROFILE_PIC},
+                COL_ID + "=?", new String[]{userId}, null, null, null);
+
+        if (cursor != null && cursor.moveToFirst()) {
+            byte[] imageBytes = cursor.getBlob(cursor.getColumnIndexOrThrow(COL_PROFILE_PIC));
+            cursor.close();
+            return imageBytes;
+        }
+
+        return null;
+    }
+
+    // === LISTINGS ===
     public boolean insertListing(String id, String title, String desc, String category, double price,
                                  int quantity, String sellerId, String sellerName,
                                  String sellerPhone, String sellerAddress) {
@@ -207,7 +226,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     }
 
     // === PURCHASE HISTORY ===
-
     public boolean insertPurchase(String buyerId, String title, String price,
                                   String desc, String seller, String date) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -230,7 +248,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 null, null, COL_DATE + " DESC");
     }
 
-    // === DEBUGGING METHOD ===
+    // === DEBUG METHOD ===
     public void logAllUsers() {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_USERS, null);

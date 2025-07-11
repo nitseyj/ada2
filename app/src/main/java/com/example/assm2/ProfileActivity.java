@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 public class ProfileActivity extends AppCompatActivity {
@@ -31,7 +33,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     SQLiteHelper dbHelper;
     String userId, userRole;
-    Bitmap selectedBitmap; // Optional: for future use
+    Bitmap selectedBitmap = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +53,7 @@ public class ProfileActivity extends AppCompatActivity {
         dbHelper = new SQLiteHelper(this);
         userId = getIntent().getStringExtra("id");
 
-        // Load user profile data
+        // Load user profile
         Cursor cursor = dbHelper.getUserById(userId);
         if (cursor != null && cursor.moveToFirst()) {
             etName.setText(cursor.getString(cursor.getColumnIndexOrThrow("name")));
@@ -60,11 +62,16 @@ public class ProfileActivity extends AppCompatActivity {
             etPin.setText(cursor.getString(cursor.getColumnIndexOrThrow("pin")));
             userRole = cursor.getString(cursor.getColumnIndexOrThrow("role"));
             cursor.close();
-        } else {
-            Toast.makeText(this, "Failed to load profile", Toast.LENGTH_SHORT).show();
         }
 
-        // Show/Hide PIN toggle
+        // Load profile picture
+        byte[] imageBytes = dbHelper.getProfilePicture(userId);
+        if (imageBytes != null) {
+            Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+            imgProfile.setImageBitmap(bitmap);
+        }
+
+        // Toggle PIN visibility
         checkboxShowPIN.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 etPin.setInputType(InputType.TYPE_CLASS_NUMBER);
@@ -74,19 +81,19 @@ public class ProfileActivity extends AppCompatActivity {
             etPin.setSelection(etPin.getText().length());
         });
 
-        // Save button
-        btnSave.setOnClickListener(v -> saveProfileChanges());
-
-        // Back button
-        btnBack.setOnClickListener(v -> finish());
-
-        // Upload Image button
+        // Upload image
         btnUploadImage.setOnClickListener(v -> {
             Intent intent = new Intent();
             intent.setType("image/*");
             intent.setAction(Intent.ACTION_GET_CONTENT);
             startActivityForResult(Intent.createChooser(intent, "Select Profile Image"), PICK_IMAGE_REQUEST);
         });
+
+        // Save changes
+        btnSave.setOnClickListener(v -> saveProfileChanges());
+
+        // Back
+        btnBack.setOnClickListener(v -> finish());
     }
 
     @Override
@@ -98,9 +105,20 @@ public class ProfileActivity extends AppCompatActivity {
             try {
                 selectedBitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
                 imgProfile.setImageBitmap(selectedBitmap);
-                // Optional: save image to SQLite as byte[] if needed
+
+                // Save image to SQLite
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                selectedBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                byte[] imageBytes = stream.toByteArray();
+
+                boolean saved = dbHelper.updateProfilePicture(userId, imageBytes);
+                if (!saved) {
+                    Toast.makeText(this, "Failed to save image", Toast.LENGTH_SHORT).show();
+                }
+
             } catch (IOException e) {
                 e.printStackTrace();
+                Toast.makeText(this, "Image load failed", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -127,7 +145,7 @@ public class ProfileActivity extends AppCompatActivity {
         if (rows > 0) {
             Toast.makeText(this, "Profile updated", Toast.LENGTH_SHORT).show();
 
-            // Redirect based on role
+            // Redirect
             Intent intent;
             if ("buyer".equalsIgnoreCase(userRole)) {
                 intent = new Intent(this, BuyerDashboardActivity.class);

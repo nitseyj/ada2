@@ -3,10 +3,9 @@ package com.example.assm2;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,8 +13,9 @@ import java.util.ArrayList;
 
 public class PurchaseHistoryActivity extends AppCompatActivity {
 
-    ListView listViewHistory;
-    Button btnBackPurchaseHistory;
+    ListView listViewPurchase;
+    Button btnBackPurchase;
+    TextView txtTotalSpent;
     SQLiteHelper dbHelper;
     String buyerId;
 
@@ -27,46 +27,47 @@ public class PurchaseHistoryActivity extends AppCompatActivity {
         dbHelper = new SQLiteHelper(this);
         buyerId = getIntent().getStringExtra("id");
 
-        listViewHistory = findViewById(R.id.listViewHistory);
-        btnBackPurchaseHistory = findViewById(R.id.btnBackPurchaseHistory);
+        listViewPurchase = findViewById(R.id.listViewPurchase);
+        btnBackPurchase = findViewById(R.id.btnBackPurchase);
+        txtTotalSpent = findViewById(R.id.txtTotalSpent);
 
         loadPurchaseHistory();
 
-        btnBackPurchaseHistory.setOnClickListener(v -> {
-            Intent back = new Intent(PurchaseHistoryActivity.this, BuyerDashboardActivity.class);
-            back.putExtra("id", buyerId);
-            startActivity(back);
+        btnBackPurchase.setOnClickListener(v -> {
+            Intent intent = new Intent(this, BuyerDashboardActivity.class);
+            intent.putExtra("id", buyerId);
+            startActivity(intent);
             finish();
         });
     }
 
     private void loadPurchaseHistory() {
-        ArrayList<String> historyList = new ArrayList<>();
+        ArrayList<PurchaseItem> historyList = new ArrayList<>();
         Cursor cursor = dbHelper.getPurchaseHistory(buyerId);
+        double total = 0.0;
 
         if (cursor != null && cursor.moveToFirst()) {
             do {
                 String title = cursor.getString(cursor.getColumnIndexOrThrow("item_title"));
-                String price = cursor.getString(cursor.getColumnIndexOrThrow("item_price"));
+                String priceStr = cursor.getString(cursor.getColumnIndexOrThrow("item_price"));
                 String desc = cursor.getString(cursor.getColumnIndexOrThrow("item_desc"));
                 String seller = cursor.getString(cursor.getColumnIndexOrThrow("seller"));
                 String date = cursor.getString(cursor.getColumnIndexOrThrow("date"));
 
-                String entry = "Title: " + title +
-                        "\nPrice: RM " + price +
-                        "\nDescription: " + desc +
-                        "\nSeller: " + seller +
-                        "\nDate: " + date;
+                double price = 0.0;
+                try {
+                    price = Double.parseDouble(priceStr);
+                } catch (Exception ignored) {}
 
-                historyList.add(entry);
+                total += price;
+
+                historyList.add(new PurchaseItem(title, priceStr, desc, seller, date));
             } while (cursor.moveToNext());
             cursor.close();
-        } else {
-            historyList.add("No purchase history found.");
         }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, historyList);
-        listViewHistory.setAdapter(adapter);
+        txtTotalSpent.setText("Total Spent: RM " + String.format("%.2f", total));
+        PurchaseHistoryAdapter adapter = new PurchaseHistoryAdapter(this, historyList);
+        listViewPurchase.setAdapter(adapter);
     }
 }
