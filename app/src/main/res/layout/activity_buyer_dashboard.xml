@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_gradient_green">
 
-    <!-- Scrollable content area -->
+    <!-- Scrollable content areas -->
     <LinearLayout
         android:id="@+id/contentLayout"
         android:orientation="vertical"
