@@ -165,7 +165,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         return null;
     }
 
-    // ✅ === NEW METHOD: Get sellers with address and profile picture ===
+    // Get sellers with address and profile picture
     public Cursor getSellersWithAddress() {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.query(

@@ -7,7 +7,7 @@
     android:padding="16dp"
     android:background="@drawable/bg_gradient_green">
 
-    <!-- ViewPager2 for Onboarding Slides -->
+    <!-- Onboarding Slides -->
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/onboardingViewPager"
         android:layout_width="0dp"

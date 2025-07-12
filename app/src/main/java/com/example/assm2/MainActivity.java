@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
         btnBuyer = findViewById(R.id.btnBuyer);
         btnSeller = findViewById(R.id.btnSeller);
-        txtFirstTime = findViewById(R.id.txtFirstTime); // assuming this is the "Register" text
+        txtFirstTime = findViewById(R.id.txtFirstTime);
 
         btnBuyer.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
@@ -34,9 +34,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         txtFirstTime.setOnClickListener(v -> {
-            // Default to buyer registration (optional: you can let users choose again)
             Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
-            intent.putExtra("role", "buyer"); // or "seller"
+            intent.putExtra("role", "buyer");
             startActivity(intent);
         });
     }

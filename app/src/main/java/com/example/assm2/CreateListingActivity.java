@@ -38,9 +38,8 @@ public class CreateListingActivity extends AppCompatActivity {
         spinnerCategory = findViewById(R.id.spinnerCategory);
         txtAddress = findViewById(R.id.txtAddress);
         btnUpload = findViewById(R.id.btnUploadListing);
-        btnBack = findViewById(R.id.btnBackCreate); // ✅ Back button binding
+        btnBack = findViewById(R.id.btnBackCreate);
 
-        // Populate dropdown with fixed categories
         String[] categories = {"Plastic", "Glass", "Paper", "Aluminum", "Electronics", "Others"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, categories);
         spinnerCategory.setAdapter(adapter);
@@ -69,7 +68,7 @@ public class CreateListingActivity extends AppCompatActivity {
             Toast.makeText(this, "Unable to fetch seller details", Toast.LENGTH_SHORT).show();
         }
 
-        // ✅ Back button logic
+        // Back button logic
         btnBack.setOnClickListener(v -> {
             Intent backIntent = new Intent(this, SellerDashboardActivity.class);
             backIntent.putExtra("id", sellerId);

@@ -24,9 +24,9 @@ public class ListingDetailActivity extends AppCompatActivity {
         txtDesc = findViewById(R.id.txtDescDetail);
         txtStatus = findViewById(R.id.txtStatusDetail);
         btnPurchase = findViewById(R.id.btnPurchase);
-        btnBackDetail = findViewById(R.id.btnBackDetail); // ← new
+        btnBackDetail = findViewById(R.id.btnBackDetail);
 
-        btnBackDetail.setOnClickListener(v -> finish()); // ← new
+        btnBackDetail.setOnClickListener(v -> finish());
 
         String title = getIntent().getStringExtra("title");
         String price = getIntent().getStringExtra("price");

@@ -24,11 +24,11 @@ public class ContactUsActivity extends AppCompatActivity {
         fbLayout = findViewById(R.id.layoutFacebook);
         instaLayout = findViewById(R.id.layoutInstagram);
         twitterLayout = findViewById(R.id.layoutTwitter);
-        btnBackContact = findViewById(R.id.btnBackContact); // ✅ Add this line
+        btnBackContact = findViewById(R.id.btnBackContact);
 
         // Back button click
         btnBackContact.setOnClickListener(v -> {
-            finish(); // ✅ Go back to the previous screen
+            finish();
         });
 
         // Phone click

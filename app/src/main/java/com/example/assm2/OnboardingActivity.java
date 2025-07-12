@@ -22,7 +22,7 @@ public class OnboardingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_onboarding);
 
         ViewPager2 viewPager = findViewById(R.id.onboardingViewPager);
-        TabLayout tabLayout = findViewById(R.id.tabIndicator); // 👈 Add this line
+        TabLayout tabLayout = findViewById(R.id.tabIndicator);
         Button buttonNext = findViewById(R.id.buttonNext);
         Button buttonSkip = findViewById(R.id.buttonSkip);
 
@@ -34,7 +34,6 @@ public class OnboardingActivity extends AppCompatActivity {
         OnboardingAdapter adapter = new OnboardingAdapter(items);
         viewPager.setAdapter(adapter);
 
-        // 🔗 Connect TabLayout to ViewPager2
         new TabLayoutMediator(tabLayout, viewPager,
                 (tab, position) -> tab.setIcon(R.drawable.dot_selector)
         ).attach();

@@ -3,10 +3,8 @@ package com.example.assm2;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -66,7 +64,7 @@ public class BuyerDashboardActivity extends AppCompatActivity {
         navRecycle = findViewById(R.id.navRecycle);
         navMap = findViewById(R.id.navMap);
         navPricing = findViewById(R.id.navPricing);
-        navContact = findViewById(R.id.navContact); // <-- changed from navLearn
+        navContact = findViewById(R.id.navContact);
         navProfile = findViewById(R.id.navProfile);
 
         txtWelcomeBuyer.setText("Welcome, " + buyerName);
@@ -109,7 +107,7 @@ public class BuyerDashboardActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        // 🧭 Bottom nav actions
+        // Bottom nav actions
         navRecycle.setOnClickListener(v -> recreate());
 
         navMap.setOnClickListener(v -> {
@@ -125,7 +123,7 @@ public class BuyerDashboardActivity extends AppCompatActivity {
         });
 
         navContact.setOnClickListener(v -> {
-            Intent intent = new Intent(this, ContactUsActivity.class); // <-- updated here
+            Intent intent = new Intent(this, ContactUsActivity.class);
             intent.putExtra("id", buyerId);
             startActivity(intent);
         });

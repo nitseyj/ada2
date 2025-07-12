@@ -2,7 +2,6 @@ package com.example.assm2;
 
 import android.os.Bundle;
 import android.view.Gravity;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -40,10 +39,10 @@ public class PricingActivity extends AppCompatActivity {
         // Load material cards
         loadMaterialCards();
 
-        // Back button → go back to previous activity
+        // Back button to go back to previous activity
         btnBackPricing.setOnClickListener(v -> finish());
 
-        // Refresh button → show toast message
+        // Refresh button and show toast message
         btnRefreshPricing.setOnClickListener(v ->
                 Toast.makeText(this, "Price is already up-to-date", Toast.LENGTH_SHORT).show());
     }
@@ -51,7 +50,6 @@ public class PricingActivity extends AppCompatActivity {
     private void loadMaterialCards() {
         containerPricing.removeAllViews();
 
-        // Add material categories
         addMaterialCard(R.drawable.ic_metal, "Metal", "RM 0.80 / kg");
         addMaterialCard(R.drawable.ic_plastic, "Plastic", "RM 0.50 / kg");
         addMaterialCard(R.drawable.ic_paper, "Paper", "RM 0.30 / kg");

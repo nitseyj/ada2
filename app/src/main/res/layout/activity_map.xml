@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="16dp"
-        android:layout_above="@+id/btnRefresh"> <!-- 🟡 KEY CHANGE: allow space for refresh button -->
+        android:layout_above="@+id/btnRefresh">
 
         <!-- Back Button (Top Left) -->
         <Button
