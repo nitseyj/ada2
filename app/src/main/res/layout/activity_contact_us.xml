@@ -207,6 +207,17 @@
                     android:textSize="14sp" />
             </LinearLayout>
 
+            <!-- Note -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Note: Click any icons to reach us"
+                android:textColor="#0D2B3E"
+                android:textSize="13sp"
+                android:textStyle="italic"
+                android:layout_marginBottom="32dp"
+                android:gravity="center"
+                android:layout_gravity="center_horizontal" />
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>

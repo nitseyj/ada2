@@ -2,6 +2,12 @@
     <string name="app_name">assm2</string>
     <string name="select_category">Select a Category</string>
 
+    <string name="mapbox_access_token">
+    pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.SvMCq3kRoBJN3EJxanSbzA
+</string>
+
+
+
     <string-array name="recycling_categories">
         <item>Plastic</item>
         <item>Paper</item>

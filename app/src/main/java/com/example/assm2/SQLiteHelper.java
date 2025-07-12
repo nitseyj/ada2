@@ -21,7 +21,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     private static final String COL_ADDRESS = "address";
     private static final String COL_PIN = "pin";
     private static final String COL_ROLE = "role";
-    private static final String COL_PROFILE_PIC = "profile_pic"; // ✅ NEW
+    private static final String COL_PROFILE_PIC = "profile_pic";
 
     // === LISTINGS TABLE ===
     private static final String TABLE_LISTINGS = "listings";
@@ -52,7 +52,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // === USERS TABLE ===
         String createUsersTable = "CREATE TABLE " + TABLE_USERS + " (" +
                 COL_ID + " TEXT PRIMARY KEY, " +
                 COL_NAME + " TEXT, " +
@@ -61,10 +60,9 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 COL_ADDRESS + " TEXT, " +
                 COL_PIN + " TEXT, " +
                 COL_ROLE + " TEXT, " +
-                COL_PROFILE_PIC + " BLOB)"; // ✅ NEW
+                COL_PROFILE_PIC + " BLOB)";
         db.execSQL(createUsersTable);
 
-        // === LISTINGS TABLE ===
         String createListingsTable = "CREATE TABLE " + TABLE_LISTINGS + " (" +
                 COL_LISTING_ID + " TEXT PRIMARY KEY, " +
                 COL_TITLE + " TEXT, " +
@@ -78,7 +76,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 COL_SELLER_ADDRESS + " TEXT)";
         db.execSQL(createListingsTable);
 
-        // === PURCHASE TABLE ===
         String createPurchasesTable = "CREATE TABLE " + TABLE_PURCHASES + " (" +
                 COL_PURCHASE_ID + " TEXT PRIMARY KEY, " +
                 COL_BUYER_ID + " TEXT, " +
@@ -168,6 +165,19 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         return null;
     }
 
+    // ✅ === NEW METHOD: Get sellers with address and profile picture ===
+    public Cursor getSellersWithAddress() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.query(
+                TABLE_USERS,
+                new String[]{COL_NAME, COL_PHONE, COL_ADDRESS, COL_PROFILE_PIC},
+                COL_ROLE + "=? AND " + COL_ADDRESS + " IS NOT NULL AND " + COL_ADDRESS + " != ''",
+                new String[]{"seller"},
+                null, null,
+                COL_NAME + " ASC"
+        );
+    }
+
     // === LISTINGS ===
     public boolean insertListing(String id, String title, String desc, String category, double price,
                                  int quantity, String sellerId, String sellerName,
@@ -248,7 +258,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 null, null, COL_DATE + " DESC");
     }
 
-    // === DEBUG METHOD ===
     public void logAllUsers() {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_USERS, null);
